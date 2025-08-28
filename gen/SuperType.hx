@@ -33,19 +33,19 @@ class SuperType {
   function buildTypes(api: JsonApi): Map<String, Array<String>> {
     final superTypes: Map<String, Array<String>> = new Map();
     for (type in api.types) {
-      superTypes[type.name] = type.superTypes ?? [];
+      superTypes[type.name] = type.supertypes ?? [];
     }
 
     for (module in api.modules) {
       if (module.types != null) {
         for (type in module.types) {
-          superTypes[type.name] = type.superTypes ?? [];
+          superTypes[type.name] = type.supertypes ?? [];
         }
       }
 
       if (module.enums != null) {
         for (em in module.enums) {
-          superTypes[em.name] = em.superTypes ?? [];
+          superTypes[em.name] = em.supertypes ?? [];
         }
       }
     }

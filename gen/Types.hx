@@ -32,7 +32,7 @@ typedef JsonFunction = {
 
 typedef JsonType = {
   var name: String;
-  var ?superTypes: Array<String>;
+  var ?supertypes: Array<String>;
   var ?description: String;
   var ?functions: Array<JsonFunction>;
   var ?constructors: Array<String>;
@@ -40,7 +40,7 @@ typedef JsonType = {
 
 typedef JsonEnum = {
   var name: String;
-  var ?superTypes: Array<String>;
+  var ?supertypes: Array<String>;
   var ?description: String;
   var constants: Array<JsonEnumField>;
 }

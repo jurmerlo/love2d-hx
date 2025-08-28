@@ -20,12 +20,12 @@ import sys.io.File;
 using StringTools;
 
 function getType(jsonType: String): String {
-  if (jsonType.indexOf(' or ') != null) {
+  if (jsonType.indexOf(' or ') != -1) {
     return 'Dynamic';
   }
 
   switch (jsonType) {
-    case 'string':
+    case 'string', 'ShaderVariableType':
       return 'String';
 
     case 'number':
@@ -37,14 +37,14 @@ function getType(jsonType: String): String {
     case 'table':
       return 'Table<Dynamic, Dynamic>';
 
-    case 'light userdata':
+    case 'light userdata', 'userdata':
       return 'UserData';
 
-    case 'userdata':
-      return 'UserData';
+    case 'function', 'mixed', 'value', 'any', 'Variant', 'cdata':
+      return 'Dynamic';
 
     default:
-      return 'Dynamic';
+      return jsonType;
   }
 }
 
@@ -67,33 +67,40 @@ function main() {
   final superType = new SuperType(data);
   final resolver = new PackageResolver(data);
 
-  final moduleResult = createModule(data.modules[0], superType, resolver);
+  for (module in data.modules) {
+    final moduleResult = createModule(module, superType, resolver);
+    FileSystem.createDirectory(moduleResult.outputFolder);
+    for (file in moduleResult.files) {
+      File.saveContent(Path.join([moduleResult.outputFolder, file.filename]), file.content);
+    }
+  }
+
+  final moduleResult = createModule(cast data, superType, resolver, 'love');
   FileSystem.createDirectory(moduleResult.outputFolder);
   for (file in moduleResult.files) {
-    File.saveContent(Path.join([Sys.getCwd(), file.filename]), file.content);
+    File.saveContent(Path.join([moduleResult.outputFolder, file.filename]), file.content);
   }
 }
 
 function createImports(): Array<String> {
-  return ['import haxe.extern.Rest;', 'import lua.Table;', 'import lua.UserData;', ''];
+  return ['import haxe.extern.Rest;', 'import lua.Table;', 'import lua.UserData;'];
 }
 
 function getHaxeType(type: JsonProperty, types: Map<String, Bool>): String {
   var haxeType = '';
 
   if (type.type == 'function') {
-    haxeType = funcArguments(type.signature.arguments, types, true);
+    haxeType = funcArguments(type?.signature?.arguments, types, true);
     haxeType += ' -> ';
 
-    if (type.signature.returns != null && type.signature.returns.length > 0) {
+    if (type?.signature?.returns != null && type?.signature?.returns?.length > 0) {
       haxeType += getHaxeType(type.signature.returns[0], types);
     } else {
       haxeType += 'Void';
     }
   } else {
-    final basicType = getType(type.type);
-
-    types[basicType] = true;
+    haxeType = getType(type.type);
+    types[haxeType] = true;
   }
 
   return haxeType;
@@ -151,7 +158,7 @@ function createOverload(typeName: String, name: String, variant: JsonVariant, ty
         while (regex.match(txt)) {
           final argName = regex.matched(0);
           txt = regex.matchedRight();
-          final ar = '${arg.defaultValue != null ? '?' : ''}${correctIdentifier(argName)}: ${arg.type}'
+          final ar = '${arg.defaultValue != null ? '?' : ''}${correctIdentifier(argName)}: ${type}'
             + '${arg.defaultValue != null ? ' = ${arg.defaultValue}' : ''}';
           arguments.push(ar);
         }
@@ -169,10 +176,11 @@ function createOverload(typeName: String, name: String, variant: JsonVariant, ty
     }
   }
 
-  return '${arguments.join(', ')}: ${returnType}';
+  return '(${arguments.join(', ')}): ${returnType}';
 }
 
-function createCallback(cb: JsonFunction, types: Map<String, Bool>): String {
+function createCallback(cb: JsonFunction, types: Map<String, Bool>): Array<String> {
+  var lines: Array<String> = [];
   var signature = funcArguments(cb.variants[0].arguments, types, false);
   signature += ' -> ';
 
@@ -186,7 +194,13 @@ function createCallback(cb: JsonFunction, types: Map<String, Bool>): String {
     signature += 'Void';
   }
 
-  return '\tpublic static var ${cb.name}: ${signature};';
+  lines.push('');
+  if (cb.description != null) {
+    lines = lines.concat(createComment(cb.description, '\t', cb.variants[0]));
+  }
+  lines.push('\tpublic static var ${cb.name}: ${signature};');
+
+  return lines;
 }
 
 function createFunctionBase(typeName: String, func: JsonFunction, types: Map<String, Bool>, isStatic: Bool,
@@ -208,7 +222,7 @@ function createFunctionBase(typeName: String, func: JsonFunction, types: Map<Str
     lines.push('\t@:overload(function ${sig} {})');
   }
 
-  lines.push('\tpublic${isStatic ? ' static' : ''} function ${func.name}${mainFunc}');
+  lines.push('\tpublic${isStatic ? ' static' : ''} function ${func.name}${mainFunc};');
 
   return lines;
 }
@@ -232,7 +246,7 @@ function createEnum(em: JsonEnum, packageName: String): ConvertedFile {
   lines.push('enum abstract ${em.name} (String) {');
 
   for (con in em.constants) {
-    final id = correctIdentifier(capitalizeFirstLetter(em.name));
+    final id = correctIdentifier(capitalizeFirstLetter(con.name));
     lines.push('\tvar ${id} = "${con.name}";');
   }
   lines.push('}');
@@ -243,9 +257,11 @@ function createEnum(em: JsonEnum, packageName: String): ConvertedFile {
 function createComment(description: String, prefix = '', ?variantData: JsonVariant): Array<String> {
   final lines: Array<String> = ['${prefix}/**'];
   for (line in description.split('\n')) {
+    if (line.trim().length == 0) {
+      continue;
+    }
     lines.push('${prefix} * ${line}');
   }
-  lines.push('');
 
   if (variantData != null) {
     if (variantData.arguments != null) {
@@ -263,16 +279,17 @@ function createComment(description: String, prefix = '', ?variantData: JsonVaria
   return lines;
 }
 
-function createType(type: JsonType, packageName: String, superType: SuperType, resolver: PackageResolver,
-    multiReturns: Map<String, String>): ConvertedFile {
+function createType(type: JsonType, packageName: String, superType: SuperType,
+    resolver: PackageResolver): ConvertedFile {
   var lines: Array<String> = [];
 
   final packageLine = 'package ${packageName};\n\n';
   var imports = createImports();
   final types: Map<String, Bool> = new Map();
+  final multiReturns: Map<String, String> = new Map();
 
-  final currentSuperType = type.superTypes != null
-    && type.superTypes.length > 0 ? superType.getNearestSuperType(type.superTypes) : 'UserData';
+  final currentSuperType = type.supertypes != null
+    && type.supertypes.length > 0 ? superType.getNearestSuperType(type.supertypes) : 'UserData';
 
   if (type.description != null) {
     lines = lines.concat(createComment(type.description));
@@ -289,8 +306,16 @@ function createType(type: JsonType, packageName: String, superType: SuperType, r
   lines.push('}');
 
   imports = imports.concat(resolver.getImportLines(types, packageName));
+  imports.sort((a, b) -> {
+    if (a < b) {
+      return -1;
+    } else if (a > b) {
+      return 1;
+    }
+    return 0;
+  });
 
-  final content = packageLine + imports.join('\n') + '\n' + lines.join('\n');
+  final content = packageLine + imports.join('\n') + '\n\n' + lines.join('\n');
 
   return { filename: '${type.name}.hx', content: content };
 }
@@ -303,8 +328,7 @@ function createModule(module: JsonModule, superType: SuperType, resolver: Packag
   final multiReturns: Map<String, String> = new Map();
 
   final packageName = luaName != null ? luaName : 'love.';
-  final moduleName = packageName + module.name;
-  final prefix = moduleName.replace('.', '/') + '/';
+  final moduleName = packageName == 'love' ? packageName : packageName + module.name;
 
   final packageLine = 'package ${moduleName};\n\n';
   var imports = createImports();
@@ -323,23 +347,17 @@ function createModule(module: JsonModule, superType: SuperType, resolver: Packag
 
   if (module.functions != null) {
     for (func in module.functions) {
-      lines = lines.concat(createFunction(module.name, func, types, multiReturns));
+      lines = lines.concat(createFunction(className, func, types, multiReturns));
     }
   }
 
   if (module.callbacks != null) {
     for (cb in module.callbacks) {
-      lines.push(createCallback(cb, types));
+      lines = lines.concat(createCallback(cb, types));
     }
   }
 
   lines.push('}');
-
-  imports = imports.concat(resolver.getImportLines(types, moduleName));
-
-  final content = packageLine + imports.join('\n') + '\n' + lines.join('\n');
-
-  files.push({ filename: '${className}.hx', content: content });
 
   if (module.enums != null) {
     for (em in module.enums) {
@@ -349,9 +367,26 @@ function createModule(module: JsonModule, superType: SuperType, resolver: Packag
 
   if (module.types != null) {
     for (type in module.types) {
-      files.push(createType(type, moduleName, superType, resolver, multiReturns));
+      files.push(createType(type, moduleName, superType, resolver));
     }
   }
+
+  imports = imports.concat(resolver.getImportLines(types, moduleName));
+  imports.sort((a, b) -> {
+    if (a < b) {
+      return -1;
+    } else if (a > b) {
+      return 1;
+    }
+    return 0;
+  });
+
+  for (ret in multiReturns) {
+    lines.push(ret);
+  }
+
+  final content = packageLine + imports.join('\n') + '\n\n' + lines.join('\n');
+  files.push({ filename: '${className}.hx', content: content });
 
   var outputFolder = '';
   if (luaName == 'love') {
