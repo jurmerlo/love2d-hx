@@ -1,0 +1,13 @@
+{
+  "haxe.configurations": [
+    ["gen.hxml"],
+  ],
+  "haxecheckstyle.sourceFolders": [
+    "gen",
+  ],
+  "[haxe]": {
+    "editor.codeActionsOnSave": {
+      "source.sortImports": "explicit"
+    }
+  }
+}
