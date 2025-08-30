@@ -101,3 +101,9 @@ extern class Text extends Drawable {
 	@:overload(function (coloredtext: Table<Dynamic, Dynamic>, wraplimit: Float, align: AlignMode): Void {})
 	public function setf(textstring: String, wraplimit: Float, align: AlignMode): Void;
 }
+
+@:multiReturn
+extern class TextGetDimensionsResult {
+	var width: Float;
+	var height: Float;
+}

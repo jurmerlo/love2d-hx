@@ -163,3 +163,27 @@ extern class Mesh extends Drawable {
 	@:overload(function (vertices: Table<Dynamic, Dynamic>): Void {})
 	public function setVertices(vertices: Table<Dynamic, Dynamic>, ?startvertex: Float, ?count: Float): Void;
 }
+
+@:multiReturn
+extern class MeshGetVertexAttributeResult {
+	var value1: Float;
+	var value2: Float;
+}
+
+@:multiReturn
+extern class MeshGetVertexResult {
+	var x: Float;
+	var y: Float;
+	var u: Float;
+	var v: Float;
+	var r: Float;
+	var g: Float;
+	var b: Float;
+	var a: Float;
+}
+
+@:multiReturn
+extern class MeshGetDrawRangeResult {
+	var min: Float;
+	var max: Float;
+}

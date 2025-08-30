@@ -28,3 +28,9 @@ extern class GearJoint extends Joint {
 	 */
 	public function setRatio(ratio: Float): Void;
 }
+
+@:multiReturn
+extern class GearJointGetJointsResult {
+	var joint1: Joint;
+	var joint2: Joint;
+}

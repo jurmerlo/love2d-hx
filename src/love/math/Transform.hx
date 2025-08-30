@@ -137,3 +137,35 @@ extern class Transform extends Object {
 	 */
 	public function translate(dx: Float, dy: Float): Transform;
 }
+
+@:multiReturn
+extern class TransformTransformPointResult {
+	var localX: Float;
+	var localY: Float;
+}
+
+@:multiReturn
+extern class TransformInverseTransformPointResult {
+	var globalX: Float;
+	var globalY: Float;
+}
+
+@:multiReturn
+extern class TransformGetMatrixResult {
+	var e1_1: Float;
+	var e1_2: Float;
+	var e1_3: Float;
+	var e1_4: Float;
+	var e2_1: Float;
+	var e2_2: Float;
+	var e2_3: Float;
+	var e2_4: Float;
+	var e3_1: Float;
+	var e3_2: Float;
+	var e3_3: Float;
+	var e3_4: Float;
+	var e4_1: Float;
+	var e4_2: Float;
+	var e4_3: Float;
+	var e4_4: Float;
+}

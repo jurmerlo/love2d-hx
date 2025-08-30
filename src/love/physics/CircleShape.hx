@@ -35,3 +35,9 @@ extern class CircleShape extends Shape {
 	 */
 	public function setRadius(radius: Float): Void;
 }
+
+@:multiReturn
+extern class CircleShapeGetPointResult {
+	var x: Float;
+	var y: Float;
+}

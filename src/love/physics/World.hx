@@ -155,3 +155,17 @@ extern class World extends Object {
 	 */
 	public function update(dt: Float, ?velocityiterations: Float, ?positioniterations: Float): Void;
 }
+
+@:multiReturn
+extern class WorldGetGravityResult {
+	var x: Float;
+	var y: Float;
+}
+
+@:multiReturn
+extern class WorldGetCallbacksResult {
+	var beginContact: Void -> Void;
+	var endContact: Void -> Void;
+	var preSolve: Void -> Void;
+	var postSolve: Void -> Void;
+}

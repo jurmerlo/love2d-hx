@@ -94,3 +94,16 @@ extern class Video extends Drawable {
 	 */
 	public function tell(): Float;
 }
+
+@:multiReturn
+extern class VideoGetFilterResult {
+	var min: FilterMode;
+	var mag: FilterMode;
+	var anisotropy: Float;
+}
+
+@:multiReturn
+extern class VideoGetDimensionsResult {
+	var width: Float;
+	var height: Float;
+}

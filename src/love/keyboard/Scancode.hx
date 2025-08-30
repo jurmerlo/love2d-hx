@@ -244,7 +244,7 @@ enum abstract Scancode (String) {
 	/**
 	 * The non-U.S. hash scancode.
 	 */
-	var Nonus# = 'nonus#';
+	var NonUSHash = 'nonus#';
 
 	/**
 	 * The semicolon key on an American layout.

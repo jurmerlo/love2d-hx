@@ -28,11 +28,15 @@ function funcArguments(arguments: Null<Array<JsonProperty>>, types: Map<String, 
       argsResult += ', ';
     }
 
-    if (isFuncType) {
-      argsResult += '${arg.name}: ';
-    }
+    if (arg.name == '...') {
+      argsResult += 'args: Rest<${getHaxeType(arg, types)}>';
+    } else {
+      if (isFuncType) {
+        argsResult += '${arg.name}: ';
+      }
 
-    argsResult += getHaxeType(arg, types);
+      argsResult += getHaxeType(arg, types);
+    }
   }
   argsResult += ')';
 

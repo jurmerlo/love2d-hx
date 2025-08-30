@@ -132,6 +132,9 @@ function mapKeyboardId(key: String): String {
     case 'kp=':
       return 'KpEqual';
 
+    case 'nonus#':
+      return 'NonUSHash';
+
     default:
       return key;
   }

@@ -64,3 +64,29 @@ extern class ChainShape extends Shape {
 	 */
 	public function setPreviousVertex(x: Float, y: Float): Void;
 }
+
+@:multiReturn
+extern class ChainShapeGetPreviousVertexResult {
+	var x: Float;
+	var y: Float;
+}
+
+@:multiReturn
+extern class ChainShapeGetPointsResult {
+	var x1: Float;
+	var y1: Float;
+	var x2: Float;
+	var y2: Float;
+}
+
+@:multiReturn
+extern class ChainShapeGetPointResult {
+	var x: Float;
+	var y: Float;
+}
+
+@:multiReturn
+extern class ChainShapeGetNextVertexResult {
+	var x: Float;
+	var y: Float;
+}

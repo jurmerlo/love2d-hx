@@ -154,3 +154,11 @@ extern class SpriteBatch extends Drawable {
 	 */
 	public function setTexture(texture: Texture): Void;
 }
+
+@:multiReturn
+extern class SpriteBatchGetColorResult {
+	var r: Float;
+	var g: Float;
+	var b: Float;
+	var a: Float;
+}

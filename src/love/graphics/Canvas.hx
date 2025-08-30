@@ -52,5 +52,5 @@ extern class Canvas extends Texture {
 	 * @param func A function performing drawing operations.
 	 * @param ... Additional arguments to call the function with.
 	 */
-	public function renderTo(func: (...: Dynamic) -> Void, args: Rest<Dynamic>): Void;
+	public function renderTo(func: (args: Rest<Dynamic>) -> Void, args: Rest<Dynamic>): Void;
 }

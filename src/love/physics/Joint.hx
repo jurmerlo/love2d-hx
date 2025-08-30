@@ -72,3 +72,23 @@ extern class Joint extends Object {
 	 */
 	public function setUserData(value: Dynamic): Void;
 }
+
+@:multiReturn
+extern class JointGetReactionForceResult {
+	var x: Float;
+	var y: Float;
+}
+
+@:multiReturn
+extern class JointGetBodiesResult {
+	var bodyA: Body;
+	var bodyB: Body;
+}
+
+@:multiReturn
+extern class JointGetAnchorsResult {
+	var x1: Float;
+	var y1: Float;
+	var x2: Float;
+	var y2: Float;
+}

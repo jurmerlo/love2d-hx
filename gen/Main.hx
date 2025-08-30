@@ -155,6 +155,10 @@ private function createType(type: JsonType, packageName: String, superType: Supe
   final resolvedImports = resolver.getImportLines(types, packageName);
   final imports = createImports(resolvedImports);
 
+  for (ret in multiReturns) {
+    lines.push(ret);
+  }
+
   final content = packageLines.join('\n') + imports.join('\n') + '\n\n' + lines.join('\n');
 
   return { filename: '${type.name}.hx', content: content };

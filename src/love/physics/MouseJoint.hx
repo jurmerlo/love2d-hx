@@ -59,3 +59,9 @@ extern class MouseJoint extends Joint {
 	 */
 	public function setTarget(x: Float, y: Float): Void;
 }
+
+@:multiReturn
+extern class MouseJointGetTargetResult {
+	var x: Float;
+	var y: Float;
+}

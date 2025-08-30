@@ -116,3 +116,16 @@ extern class Font extends Object {
 	 */
 	public function setLineHeight(height: Float): Void;
 }
+
+@:multiReturn
+extern class FontGetWrapResult {
+	var width: Float;
+	var wrappedtext: Table<Dynamic, Dynamic>;
+}
+
+@:multiReturn
+extern class FontGetFilterResult {
+	var min: FilterMode;
+	var mag: FilterMode;
+	var anisotropy: Float;
+}

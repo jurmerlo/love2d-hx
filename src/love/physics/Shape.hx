@@ -76,3 +76,26 @@ extern class Shape extends Object {
 	 */
 	public function testPoint(tx: Float, ty: Float, tr: Float, x: Float, y: Float): Bool;
 }
+
+@:multiReturn
+extern class ShapeRayCastResult {
+	var xn: Float;
+	var yn: Float;
+	var fraction: Float;
+}
+
+@:multiReturn
+extern class ShapeComputeMassResult {
+	var x: Float;
+	var y: Float;
+	var mass: Float;
+	var inertia: Float;
+}
+
+@:multiReturn
+extern class ShapeComputeAABBResult {
+	var topLeftX: Float;
+	var topLeftY: Float;
+	var bottomRightX: Float;
+	var bottomRightY: Float;
+}

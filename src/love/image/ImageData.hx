@@ -100,3 +100,17 @@ extern class ImageData extends Data {
 	 */
 	public function getFormat(): PixelFormat;
 }
+
+@:multiReturn
+extern class ImageDataGetPixelResult {
+	var r: Float;
+	var g: Float;
+	var b: Float;
+	var a: Float;
+}
+
+@:multiReturn
+extern class ImageDataGetDimensionsResult {
+	var width: Float;
+	var height: Float;
+}

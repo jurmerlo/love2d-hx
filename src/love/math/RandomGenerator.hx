@@ -54,3 +54,9 @@ extern class RandomGenerator extends Object {
 	 */
 	public function setState(state: String): Void;
 }
+
+@:multiReturn
+extern class RandomGeneratorGetSeedResult {
+	var low: Float;
+	var high: Float;
+}

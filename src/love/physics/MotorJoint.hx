@@ -35,3 +35,9 @@ extern class MotorJoint extends Joint {
 	 */
 	public function setLinearOffset(x: Float, y: Float): Void;
 }
+
+@:multiReturn
+extern class MotorJointGetLinearOffsetResult {
+	var x: Float;
+	var y: Float;
+}

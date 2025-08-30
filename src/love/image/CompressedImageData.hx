@@ -45,3 +45,9 @@ extern class CompressedImageData extends Data {
 	@:overload(function (level: Float): Float {})
 	public function getWidth(): Float;
 }
+
+@:multiReturn
+extern class CompressedImageDataGetDimensionsResult {
+	var width: Float;
+	var height: Float;
+}

@@ -117,3 +117,15 @@ extern class BezierCurve extends Object {
 	 */
 	public function translate(dx: Float, dy: Float): Void;
 }
+
+@:multiReturn
+extern class BezierCurveGetControlPointResult {
+	var x: Float;
+	var y: Float;
+}
+
+@:multiReturn
+extern class BezierCurveEvaluateResult {
+	var x: Float;
+	var y: Float;
+}

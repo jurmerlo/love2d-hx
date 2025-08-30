@@ -51,7 +51,7 @@ extern class Channel extends Object {
 	 * @param func The function to call, the form of function(channel, arg1, arg2, ...) end. The Channel is passed as the first argument to the function when it is called.
 	 * @param ... Additional arguments that the given function will receive when it is called.
 	 */
-	public function performAtomic(func: (channel: Channel, ...: Dynamic) -> Dynamic, args: Rest<Dynamic>): ChannelPerformAtomicResult;
+	public function performAtomic(func: (channel: Channel, args: Rest<Dynamic>) -> Dynamic, args: Rest<Dynamic>): ChannelPerformAtomicResult;
 
 	/**
 	 * Retrieves the value of a Channel message and removes it from the message queue.
@@ -76,4 +76,9 @@ extern class Channel extends Object {
 	 */
 	@:overload(function (value: Dynamic, timeout: Float): Bool {})
 	public function supply(value: Dynamic): Bool;
+}
+
+@:multiReturn
+extern class ChannelPerformAtomicResult {
+	var ret1: Dynamic;
 }

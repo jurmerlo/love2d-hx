@@ -190,3 +190,33 @@ extern class Fixture extends Object {
 	 */
 	public function testPoint(x: Float, y: Float): Bool;
 }
+
+@:multiReturn
+extern class FixtureRayCastResult {
+	var xn: Float;
+	var yn: Float;
+	var fraction: Float;
+}
+
+@:multiReturn
+extern class FixtureGetMassDataResult {
+	var x: Float;
+	var y: Float;
+	var mass: Float;
+	var inertia: Float;
+}
+
+@:multiReturn
+extern class FixtureGetFilterDataResult {
+	var categories: Float;
+	var mask: Float;
+	var group: Float;
+}
+
+@:multiReturn
+extern class FixtureGetBoundingBoxResult {
+	var topLeftX: Float;
+	var topLeftY: Float;
+	var bottomRightX: Float;
+	var bottomRightY: Float;
+}

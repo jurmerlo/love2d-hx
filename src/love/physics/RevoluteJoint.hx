@@ -125,3 +125,9 @@ extern class RevoluteJoint extends Joint {
 	 */
 	public function setUpperLimit(upper: Float): Void;
 }
+
+@:multiReturn
+extern class RevoluteJointGetLimitsResult {
+	var lower: Float;
+	var upper: Float;
+}

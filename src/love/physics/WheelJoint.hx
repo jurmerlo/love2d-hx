@@ -95,3 +95,9 @@ extern class WheelJoint extends Joint {
 	 */
 	public function setSpringFrequency(freq: Float): Void;
 }
+
+@:multiReturn
+extern class WheelJointGetAxisResult {
+	var x: Float;
+	var y: Float;
+}

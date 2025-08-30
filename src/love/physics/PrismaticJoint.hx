@@ -125,3 +125,15 @@ extern class PrismaticJoint extends Joint {
 	 */
 	public function setUpperLimit(upper: Float): Void;
 }
+
+@:multiReturn
+extern class PrismaticJointGetLimitsResult {
+	var lower: Float;
+	var upper: Float;
+}
+
+@:multiReturn
+extern class PrismaticJointGetAxisResult {
+	var x: Float;
+	var y: Float;
+}

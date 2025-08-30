@@ -284,3 +284,43 @@ extern class Source extends Object {
 	 */
 	public function tell(?unit: TimeUnit): Float;
 }
+
+@:multiReturn
+extern class SourceGetVolumeLimitsResult {
+	var min: Float;
+	var max: Float;
+}
+
+@:multiReturn
+extern class SourceGetVelocityResult {
+	var x: Float;
+	var y: Float;
+	var z: Float;
+}
+
+@:multiReturn
+extern class SourceGetPositionResult {
+	var x: Float;
+	var y: Float;
+	var z: Float;
+}
+
+@:multiReturn
+extern class SourceGetDirectionResult {
+	var x: Float;
+	var y: Float;
+	var z: Float;
+}
+
+@:multiReturn
+extern class SourceGetConeResult {
+	var innerAngle: Float;
+	var outerAngle: Float;
+	var outerVolume: Float;
+}
+
+@:multiReturn
+extern class SourceGetAttenuationDistancesResult {
+	var ref: Float;
+	var max: Float;
+}
