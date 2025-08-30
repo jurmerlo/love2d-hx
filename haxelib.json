@@ -1,0 +1,10 @@
+{
+  "name": "love2d-hx",
+  "version": "1.0.0",
+  "description": "Haxe externs for Love2D",
+  "classPath": "src",
+  "license": "MIT",
+  "contributors": ["Jurmerlo"],
+  "releasenote": "",
+  "url": "https://github.com/square-two/love2d-hx"
+}
