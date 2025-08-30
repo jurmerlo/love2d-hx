@@ -1,6 +1,6 @@
 {
   "haxe.configurations": [
-    ["gen.hxml"],
+    ["generate.hxml"],
   ],
   "haxecheckstyle.sourceFolders": [
     "gen",
@@ -9,5 +9,5 @@
     "editor.codeActionsOnSave": {
       "source.sortImports": "explicit"
     }
-  }
+  },
 }

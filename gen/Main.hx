@@ -27,7 +27,12 @@ import sys.FileSystem;
 import sys.io.File;
 
 function main() {
-  final content = File.getContent('api/love_api.json');
+  if (!FileSystem.exists('love_api.json')) {
+    Sys.println('Error: love_api.json not found. Please run \'lua gen_json.lua\' to generate it.');
+    return;
+  }
+
+  final content = File.getContent('love_api.json');
   final api: JsonApi = Json.parse(content);
 
   if (FileSystem.exists('src')) {
@@ -36,7 +41,6 @@ function main() {
 
   final superType = new SuperType(api);
   final resolver = new PackageResolver(api);
-  final version = api.version;
 
   for (module in api.modules) {
     final moduleResult = createModule(module, superType, resolver);
