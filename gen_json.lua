@@ -1,5 +1,5 @@
 local love_api = require('luaLibs.love-api.love_api')
-local json = require('luaLibs.json_lua.json')
+local json = require('luaLibs.json')
 local function generate_json()
   local api = json.encode(love_api)
   api = api:gsub('"default":', '"defaultValue":') -- replace "default" with "defaultValue" because "default" is a reserved keyword in Haxe.
