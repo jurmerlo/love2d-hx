@@ -4,6 +4,8 @@ The externs are generated using the [love-api](https://github.com/love2d-communi
 
 The current externs are for Love2D 11.5.
 
+Based on [love-haxe-wrappergen](https://github.com/bartbes/love-haxe-wrappergen) but using haxe and json instead of lua to generate the externs.
+
 ## Installation
 ```bash
 haxelib git https://github.com/square-two/love2d-hx
@@ -22,7 +24,6 @@ Initialize the git submodules
 ```bash
 git submodules update --init
 ```
-
 
 Generate the api json file:
 ```bash
