@@ -14,7 +14,7 @@ import lua.UserData;
  * Provides an interface to create noise with the user's speakers.
  */
 @:native('love.audio')
-extern class AudioModule {
+extern class Audio {
 
 	/**
 	 * Gets a list of the names of the currently enabled effects.
@@ -62,12 +62,12 @@ extern class AudioModule {
 	/**
 	 * Returns the orientation of the listener.
 	 */
-	public static function getOrientation(): AudioModuleGetOrientationResult;
+	public static function getOrientation(): AudioGetOrientationResult;
 
 	/**
 	 * Returns the position of the listener. Please note that positional audio only works for mono (i.e. non-stereo) sources.
 	 */
-	public static function getPosition(): AudioModuleGetPositionResult;
+	public static function getPosition(): AudioGetPositionResult;
 
 	/**
 	 * Gets a list of RecordingDevices on the system.
@@ -80,7 +80,7 @@ extern class AudioModule {
 	/**
 	 * Returns the velocity of the listener.
 	 */
-	public static function getVelocity(): AudioModuleGetVelocityResult;
+	public static function getVelocity(): AudioGetVelocityResult;
 
 	/**
 	 * Returns the master volume.
@@ -201,21 +201,21 @@ extern class AudioModule {
 }
 
 @:multiReturn
-extern class AudioModuleGetVelocityResult {
+extern class AudioGetVelocityResult {
 	var x: Float;
 	var y: Float;
 	var z: Float;
 }
 
 @:multiReturn
-extern class AudioModuleGetPositionResult {
+extern class AudioGetPositionResult {
 	var x: Float;
 	var y: Float;
 	var z: Float;
 }
 
 @:multiReturn
-extern class AudioModuleGetOrientationResult {
+extern class AudioGetOrientationResult {
 	var fx: Float;
 	var fy: Float;
 	var fz: Float;

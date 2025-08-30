@@ -10,7 +10,7 @@ import lua.UserData;
  * Provides an interface to the user's clock.
  */
 @:native('love.timer')
-extern class TimerModule {
+extern class Timer {
 
 	/**
 	 * Returns the average delta time (seconds per frame) over the last second.

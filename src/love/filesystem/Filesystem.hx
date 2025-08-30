@@ -12,7 +12,7 @@ import lua.UserData;
  * Provides an interface to the user's filesystem.
  */
 @:native('love.filesystem')
-extern class FilesystemModule {
+extern class Filesystem {
 
 	/**
 	 * Append data to an existing file.
@@ -20,8 +20,8 @@ extern class FilesystemModule {
 	 * @param data The string data to append to the file.
 	 * @param size How many bytes to write.
 	 */
-	@:overload(function (name: String, data: Data, ?size: Float): FilesystemModuleAppendResult {})
-	public static function append(name: String, data: String, ?size: Float): FilesystemModuleAppendResult;
+	@:overload(function (name: String, data: Data, ?size: Float): FilesystemAppendResult {})
+	public static function append(name: String, data: String, ?size: Float): FilesystemAppendResult;
 
 	/**
 	 * Gets whether love.filesystem follows symbolic links.
@@ -151,7 +151,7 @@ extern class FilesystemModule {
 	 * Loads a Lua file (but does not run it).
 	 * @param name The name (and path) of the file.
 	 */
-	public static function load(name: String): FilesystemModuleLoadResult;
+	public static function load(name: String): FilesystemLoadResult;
 
 	/**
 	 * Mounts a zip file or folder in the game's save directory for reading.
@@ -171,7 +171,7 @@ extern class FilesystemModule {
 	 * @param filename The filename of the file.
 	 * @return The new File object.
 	 */
-	@:overload(function (filename: String, mode: FileMode): FilesystemModuleNewFileResult {})
+	@:overload(function (filename: String, mode: FileMode): FilesystemNewFileResult {})
 	public static function newFile(filename: String): File;
 
 	/**
@@ -181,7 +181,7 @@ extern class FilesystemModule {
 	 * @return The new FileData.
 	 */
 	@:overload(function (originaldata: Data, name: String): FileData {})
-	@:overload(function (filepath: String): FilesystemModuleNewFileDataResult {})
+	@:overload(function (filepath: String): FilesystemNewFileDataResult {})
 	public static function newFileData(contents: String, name: String): FileData;
 
 	/**
@@ -189,8 +189,8 @@ extern class FilesystemModule {
 	 * @param name The name (and path) of the file.
 	 * @param size How many bytes to read.
 	 */
-	@:overload(function (container: ContainerType, name: String, ?size: Float): FilesystemModuleReadResult {})
-	public static function read(name: String, ?size: Float): FilesystemModuleReadResult;
+	@:overload(function (container: ContainerType, name: String, ?size: Float): FilesystemReadResult {})
+	public static function read(name: String, ?size: Float): FilesystemReadResult;
 
 	/**
 	 * Removes a file or empty directory.
@@ -248,43 +248,43 @@ extern class FilesystemModule {
 	 * @param data The string data to write to the file.
 	 * @param size How many bytes to write.
 	 */
-	@:overload(function (name: String, data: Data, ?size: Float): FilesystemModuleWriteResult {})
-	public static function write(name: String, data: String, ?size: Float): FilesystemModuleWriteResult;
+	@:overload(function (name: String, data: Data, ?size: Float): FilesystemWriteResult {})
+	public static function write(name: String, data: String, ?size: Float): FilesystemWriteResult;
 }
 
 @:multiReturn
-extern class FilesystemModuleWriteResult {
+extern class FilesystemWriteResult {
 	var success: Bool;
 	var message: String;
 }
 
 @:multiReturn
-extern class FilesystemModuleReadResult {
+extern class FilesystemReadResult {
 	var contents: Dynamic;
 	var size: Float;
 	var error: String;
 }
 
 @:multiReturn
-extern class FilesystemModuleNewFileDataResult {
+extern class FilesystemNewFileDataResult {
 	var data: FileData;
 	var err: String;
 }
 
 @:multiReturn
-extern class FilesystemModuleNewFileResult {
+extern class FilesystemNewFileResult {
 	var file: File;
 	var errorstr: String;
 }
 
 @:multiReturn
-extern class FilesystemModuleLoadResult {
+extern class FilesystemLoadResult {
 	var chunk: Void -> Void;
 	var errormsg: String;
 }
 
 @:multiReturn
-extern class FilesystemModuleAppendResult {
+extern class FilesystemAppendResult {
 	var success: Bool;
 	var errormsg: String;
 }

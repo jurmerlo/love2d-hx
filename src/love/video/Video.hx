@@ -12,7 +12,7 @@ import lua.UserData;
  * It can't draw the videos, see love.graphics.newVideo and Video objects for that.
  */
 @:native('love.video')
-extern class VideoModule {
+extern class Video {
 
 	/**
 	 * Creates a new VideoStream. Currently only Ogg Theora video files are supported. VideoStreams can't draw videos, see love.graphics.newVideo for that.

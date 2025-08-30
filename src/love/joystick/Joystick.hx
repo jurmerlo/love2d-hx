@@ -7,137 +7,59 @@ import lua.Table;
 import lua.UserData;
 
 /**
- * Represents a physical joystick.
+ * Provides an interface to the user's joystick.
  */
-extern class Joystick extends Object {
+@:native('love.joystick')
+extern class Joystick {
 
 	/**
-	 * Gets the direction of each axis.
-	 */
-	public function getAxes(): JoystickGetAxesResult;
-
-	/**
-	 * Gets the direction of an axis.
-	 * @param axis The index of the axis to be checked.
-	 * @return Current value of the axis.
-	 */
-	public function getAxis(axis: Float): Float;
-
-	/**
-	 * Gets the number of axes on the joystick.
-	 * @return The number of axes available.
-	 */
-	public function getAxisCount(): Float;
-
-	/**
-	 * Gets the number of buttons on the joystick.
-	 * @return The number of buttons available.
-	 */
-	public function getButtonCount(): Float;
-
-	/**
-	 * Gets the USB vendor ID, product ID, and product version numbers of joystick which consistent across operating systems.
-	 * Can be used to show different icons, etc. for different gamepads.
-	 */
-	public function getDeviceInfo(): JoystickGetDeviceInfoResult;
-
-	/**
-	 * Gets a stable GUID unique to the type of the physical joystick which does not change over time. For example, all Sony Dualshock 3 controllers in OS X have the same GUID. The value is platform-dependent.
-	 * @return The Joystick type's OS-dependent unique identifier.
-	 */
-	public function getGUID(): String;
-
-	/**
-	 * Gets the direction of a virtual gamepad axis. If the Joystick isn't recognized as a gamepad or isn't connected, this function will always return 0.
-	 * @param axis The virtual axis to be checked.
-	 * @return Current value of the axis.
-	 */
-	public function getGamepadAxis(axis: GamepadAxis): Float;
-
-	/**
-	 * Gets the button, axis or hat that a virtual gamepad input is bound to.
-	 * @param axis The virtual gamepad axis to get the binding for.
-	 */
-	@:overload(function (button: GamepadButton): JoystickGetGamepadMappingResult {})
-	public function getGamepadMapping(axis: GamepadAxis): JoystickGetGamepadMappingResult;
-
-	/**
-	 * Gets the full gamepad mapping string of this Joystick, or nil if it's not recognized as a gamepad.
+	 * Gets the full gamepad mapping string of the Joysticks which have the given GUID, or nil if the GUID isn't recognized as a gamepad.
 	 * The mapping string contains binding information used to map the Joystick's buttons an axes to the standard gamepad layout, and can be used later with love.joystick.loadGamepadMappings.
-	 * @return A string containing the Joystick's gamepad mappings, or nil if the Joystick is not recognized as a gamepad.
+	 * @param guid The GUID value to get the mapping string for.
+	 * @return A string containing the Joystick's gamepad mappings, or nil if the GUID is not recognized as a gamepad.
 	 */
-	public function getGamepadMappingString(): String;
+	public static function getGamepadMappingString(guid: String): String;
 
 	/**
-	 * Gets the direction of the Joystick's hat.
-	 * @param hat The index of the hat to be checked.
-	 * @return The direction the hat is pushed.
+	 * Gets the number of connected joysticks.
+	 * @return The number of connected joysticks.
 	 */
-	public function getHat(hat: Float): JoystickHat;
+	public static function getJoystickCount(): Float;
 
 	/**
-	 * Gets the number of hats on the joystick.
-	 * @return How many hats the joystick has.
+	 * Gets a list of connected Joysticks.
+	 * @return The list of currently connected Joysticks.
 	 */
-	public function getHatCount(): Float;
+	public static function getJoysticks(): Table<Dynamic, Dynamic>;
 
 	/**
-	 * Gets the joystick's unique identifier. The identifier will remain the same for the life of the game, even when the Joystick is disconnected and reconnected, but it '''will''' change when the game is re-launched.
+	 * Loads a gamepad mappings string or file created with love.joystick.saveGamepadMappings.
+	 * It also recognizes any SDL gamecontroller mapping string, such as those created with Steam's Big Picture controller configure interface, or this nice database. If a new mapping is loaded for an already known controller GUID, the later version will overwrite the one currently loaded.
+	 * @param filename The filename to load the mappings string from.
 	 */
-	public function getID(): JoystickGetIDResult;
+	@:overload(function (mappings: String): Void {})
+	public static function loadGamepadMappings(filename: String): Void;
 
 	/**
-	 * Gets the name of the joystick.
-	 * @return The name of the joystick.
+	 * Saves the virtual gamepad mappings of all recognized as gamepads and have either been recently used or their gamepad bindings have been modified.
+	 * The mappings are stored as a string for use with love.joystick.loadGamepadMappings.
+	 * @param filename The filename to save the mappings string to.
+	 * @return The mappings string that was written to the file.
 	 */
-	public function getName(): String;
+	@:overload(function (): String {})
+	public static function saveGamepadMappings(filename: String): String;
 
 	/**
-	 * Gets the current vibration motor strengths on a Joystick with rumble support.
+	 * Binds a virtual gamepad input to a button, axis or hat for all Joysticks of a certain type. For example, if this function is used with a GUID returned by a Dualshock 3 controller in OS X, the binding will affect Joystick:getGamepadAxis and Joystick:isGamepadDown for ''all'' Dualshock 3 controllers used with the game when run in OS X.
+	 * LÖVE includes built-in gamepad bindings for many common controllers. This function lets you change the bindings or add new ones for types of Joysticks which aren't recognized as gamepads by default.
+	 * The virtual gamepad buttons and axes are designed around the Xbox 360 controller layout.
+	 * @param guid The OS-dependent GUID for the type of Joystick the binding will affect.
+	 * @param button The virtual gamepad button to bind.
+	 * @param inputtype The type of input to bind the virtual gamepad button to.
+	 * @param inputindex The index of the axis, button, or hat to bind the virtual gamepad button to.
+	 * @param hatdir The direction of the hat, if the virtual gamepad button will be bound to a hat. nil otherwise.
+	 * @return Whether the virtual gamepad button was successfully bound.
 	 */
-	public function getVibration(): JoystickGetVibrationResult;
-
-	/**
-	 * Gets whether the Joystick is connected.
-	 * @return True if the Joystick is currently connected, false otherwise.
-	 */
-	public function isConnected(): Bool;
-
-	/**
-	 * Checks if a button on the Joystick is pressed.
-	 * LÖVE 0.9.0 had a bug which required the button indices passed to Joystick:isDown to be 0-based instead of 1-based, for example button 1 would be 0 for this function. It was fixed in 0.9.1.
-	 * @param buttonN The index of a button to check.
-	 * @return True if any supplied button is down, false if not.
-	 */
-	public function isDown(buttonN: Float): Bool;
-
-	/**
-	 * Gets whether the Joystick is recognized as a gamepad. If this is the case, the Joystick's buttons and axes can be used in a standardized manner across different operating systems and joystick models via Joystick:getGamepadAxis, Joystick:isGamepadDown, love.gamepadpressed, and related functions.
-	 * LÖVE automatically recognizes most popular controllers with a similar layout to the Xbox 360 controller as gamepads, but you can add more with love.joystick.setGamepadMapping.
-	 * @return True if the Joystick is recognized as a gamepad, false otherwise.
-	 */
-	public function isGamepad(): Bool;
-
-	/**
-	 * Checks if a virtual gamepad button on the Joystick is pressed. If the Joystick is not recognized as a Gamepad or isn't connected, then this function will always return false.
-	 * @param buttonN The gamepad button to check.
-	 * @return True if any supplied button is down, false if not.
-	 */
-	public function isGamepadDown(buttonN: GamepadButton): Bool;
-
-	/**
-	 * Gets whether the Joystick supports vibration.
-	 * @return True if rumble / force feedback vibration is supported on this Joystick, false if not.
-	 */
-	public function isVibrationSupported(): Bool;
-
-	/**
-	 * Sets the vibration motor speeds on a Joystick with rumble support. Most common gamepads have this functionality, although not all drivers give proper support. Use Joystick:isVibrationSupported to check.
-	 * @param left Strength of the left vibration motor on the Joystick. Must be in the range of 1.
-	 * @param right Strength of the right vibration motor on the Joystick. Must be in the range of 1.
-	 * @return True if the vibration was successfully applied, false if not.
-	 */
-	@:overload(function (): Bool {})
-	@:overload(function (left: Float, right: Float, ?duration: Float): Bool {})
-	public function setVibration(left: Float, right: Float): Bool;
+	@:overload(function (guid: String, axis: GamepadAxis, inputtype: JoystickInputType, inputindex: Float, ?hatdir: JoystickHat): Bool {})
+	public static function setGamepadMapping(guid: String, button: GamepadButton, inputtype: JoystickInputType, inputindex: Float, ?hatdir: JoystickHat): Bool;
 }

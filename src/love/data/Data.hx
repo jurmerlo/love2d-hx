@@ -11,7 +11,7 @@ import lua.UserData;
  * Provides functionality for creating and transforming data.
  */
 @:native('love.data')
-extern class DataModule {
+extern class Data {
 
 	/**
 	 * Compresses a string or data using a specific compression algorithm.
@@ -109,12 +109,12 @@ extern class DataModule {
 	 * @param datastring A string containing the packed (serialized) data.
 	 * @param pos Where to start reading in the string. Negative values can be used to read relative from the end of the string.
 	 */
-	@:overload(function (format: String, data: Data, ?pos: Float): DataModuleUnpackResult {})
-	public static function unpack(format: String, datastring: String, ?pos: Float): DataModuleUnpackResult;
+	@:overload(function (format: String, data: Data, ?pos: Float): DataUnpackResult {})
+	public static function unpack(format: String, datastring: String, ?pos: Float): DataUnpackResult;
 }
 
 @:multiReturn
-extern class DataModuleUnpackResult {
+extern class DataUnpackResult {
 	var v1: Dynamic;
 	var index: Float;
 }

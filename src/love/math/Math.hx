@@ -10,7 +10,7 @@ import lua.UserData;
  * Provides system-independent mathematical functions.
  */
 @:native('love.math')
-extern class MathModule {
+extern class Math {
 
 	/**
 	 * Converts a color from 0..255 to 0..1 range.
@@ -19,7 +19,7 @@ extern class MathModule {
 	 * @param bb Blue color component in 0..255 range.
 	 * @param ab Alpha color component in 0..255 range.
 	 */
-	public static function colorFromBytes(rb: Float, gb: Float, bb: Float, ?ab: Float): MathModuleColorFromBytesResult;
+	public static function colorFromBytes(rb: Float, gb: Float, bb: Float, ?ab: Float): MathColorFromBytesResult;
 
 	/**
 	 * Converts a color from 0..1 to 0..255 range.
@@ -28,7 +28,7 @@ extern class MathModule {
 	 * @param b Blue color component.
 	 * @param a Alpha color component.
 	 */
-	public static function colorToBytes(r: Float, g: Float, b: Float, ?a: Float): MathModuleColorToBytesResult;
+	public static function colorToBytes(r: Float, g: Float, b: Float, ?a: Float): MathColorToBytesResult;
 
 	/**
 	 * Converts a color from gamma-space (sRGB) to linear-space (RGB). This is useful when doing gamma-correct rendering and you need to do math in linear RGB in the few cases where LÖVE doesn't handle conversions automatically.
@@ -38,15 +38,15 @@ extern class MathModule {
 	 * @param g The green channel of the sRGB color to convert.
 	 * @param b The blue channel of the sRGB color to convert.
 	 */
-	@:overload(function (color: Table<Dynamic, Dynamic>): MathModuleGammaToLinearResult {})
+	@:overload(function (color: Table<Dynamic, Dynamic>): MathGammaToLinearResult {})
 	@:overload(function (c: Float): Float {})
-	public static function gammaToLinear(r: Float, g: Float, b: Float): MathModuleGammaToLinearResult;
+	public static function gammaToLinear(r: Float, g: Float, b: Float): MathGammaToLinearResult;
 
 	/**
 	 * Gets the seed of the random number generator.
 	 * The seed is split into two numbers due to Lua's use of doubles for all number values - doubles can't accurately represent integer  values above 2^53, but the seed can be an integer value up to 2^64.
 	 */
-	public static function getRandomSeed(): MathModuleGetRandomSeedResult;
+	public static function getRandomSeed(): MathGetRandomSeedResult;
 
 	/**
 	 * Gets the current state of the random number generator. This returns an opaque implementation-dependent string which is only useful for later use with love.math.setRandomState or RandomGenerator:setState.
@@ -73,9 +73,9 @@ extern class MathModule {
 	 * @param lg The green channel of the linear RGB color to convert.
 	 * @param lb The blue channel of the linear RGB color to convert.
 	 */
-	@:overload(function (color: Table<Dynamic, Dynamic>): MathModuleLinearToGammaResult {})
+	@:overload(function (color: Table<Dynamic, Dynamic>): MathLinearToGammaResult {})
 	@:overload(function (lc: Float): Float {})
-	public static function linearToGamma(lr: Float, lg: Float, lb: Float): MathModuleLinearToGammaResult;
+	public static function linearToGamma(lr: Float, lg: Float, lb: Float): MathLinearToGammaResult;
 
 	/**
 	 * Creates a new BezierCurve object.
@@ -153,27 +153,27 @@ extern class MathModule {
 }
 
 @:multiReturn
-extern class MathModuleLinearToGammaResult {
+extern class MathLinearToGammaResult {
 	var cr: Float;
 	var cg: Float;
 	var cb: Float;
 }
 
 @:multiReturn
-extern class MathModuleGetRandomSeedResult {
+extern class MathGetRandomSeedResult {
 	var low: Float;
 	var high: Float;
 }
 
 @:multiReturn
-extern class MathModuleGammaToLinearResult {
+extern class MathGammaToLinearResult {
 	var lr: Float;
 	var lg: Float;
 	var lb: Float;
 }
 
 @:multiReturn
-extern class MathModuleColorToBytesResult {
+extern class MathColorToBytesResult {
 	var rb: Float;
 	var gb: Float;
 	var bb: Float;
@@ -181,7 +181,7 @@ extern class MathModuleColorToBytesResult {
 }
 
 @:multiReturn
-extern class MathModuleColorFromBytesResult {
+extern class MathColorFromBytesResult {
 	var r: Float;
 	var g: Float;
 	var b: Float;

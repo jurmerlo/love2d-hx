@@ -10,14 +10,14 @@ import lua.UserData;
  * Can simulate 2D rigid body physics in a realistic manner. This module is based on Box2D, and this API corresponds to the Box2D API as closely as possible.
  */
 @:native('love.physics')
-extern class PhysicsModule {
+extern class Physics {
 
 	/**
 	 * Returns the two closest points between two fixtures and their distance.
 	 * @param fixture1 The first fixture.
 	 * @param fixture2 The second fixture.
 	 */
-	public static function getDistance(fixture1: Fixture, fixture2: Fixture): PhysicsModuleGetDistanceResult;
+	public static function getDistance(fixture1: Fixture, fixture2: Fixture): PhysicsGetDistanceResult;
 
 	/**
 	 * Returns the meter scale factor.
@@ -277,7 +277,7 @@ extern class PhysicsModule {
 }
 
 @:multiReturn
-extern class PhysicsModuleGetDistanceResult {
+extern class PhysicsGetDistanceResult {
 	var distance: Float;
 	var x1: Float;
 	var y1: Float;

@@ -2,195 +2,70 @@
 // Love2D Version 11.5.
 
 package love.event;
+import haxe.extern.Rest;
+import lua.Table;
+import lua.UserData;
 
 /**
- * Arguments to love.event.push() and the like.
- * Since 0.8.0, event names are no longer abbreviated.
+ * Manages events, like keypresses.
  */
-enum abstract Event (String) {
+@:native('love.event')
+extern class Event {
 
 	/**
-	 * Window focus gained or lost
+	 * Clears the event queue.
 	 */
-	var Focus = 'focus';
+	public static function clear(): Void;
 
 	/**
-	 * Joystick pressed
+	 * Returns an iterator for messages in the event queue.
+	 * @return Iterator function usable in a for loop.
 	 */
-	var Joystickpressed = 'joystickpressed';
+	public static function poll(): Void -> String;
 
 	/**
-	 * Joystick released
+	 * Pump events into the event queue.
+	 * This is a low-level function, and is usually not called by the user, but by love.run.
+	 * Note that this does need to be called for any OS to think you're still running,
+	 * and if you want to handle OS-generated events at all (think callbacks).
 	 */
-	var Joystickreleased = 'joystickreleased';
+	public static function pump(): Void;
 
 	/**
-	 * Key pressed
+	 * Adds an event to the event queue.
+	 * From 0.10.0 onwards, you may pass an arbitrary amount of arguments with this function, though the default callbacks don't ever use more than six.
+	 * @param n The name of the event.
+	 * @param a First event argument.
+	 * @param b Second event argument.
+	 * @param c Third event argument.
+	 * @param d Fourth event argument.
+	 * @param e Fifth event argument.
+	 * @param f Sixth event argument.
+	 * @param ... Further event arguments may follow.
 	 */
-	var Keypressed = 'keypressed';
+	public static function push(n: Event, ?a: Dynamic, ?b: Dynamic, ?c: Dynamic, ?d: Dynamic, ?e: Dynamic, ?f: Dynamic, args: Rest<Dynamic>): Void;
 
 	/**
-	 * Key released
+	 * Adds the quit event to the queue.
+	 * The quit event is a signal for the event handler to close LÖVE. It's possible to abort the exit process with the love.quit callback.
+	 * @param exitstatus The program exit status to use when closing the application.
 	 */
-	var Keyreleased = 'keyreleased';
+	@:overload(function ('restart': String): Void {})
+	public static function quit(?exitstatus: Float): Void;
 
 	/**
-	 * Mouse pressed
+	 * Like love.event.poll(), but blocks until there is an event in the queue.
 	 */
-	var Mousepressed = 'mousepressed';
+	public static function wait(): EventWaitResult;
+}
 
-	/**
-	 * Mouse released
-	 */
-	var Mousereleased = 'mousereleased';
-
-	/**
-	 * Quit
-	 */
-	var Quit = 'quit';
-
-	/**
-	 * Window size changed by the user
-	 */
-	var Resize = 'resize';
-
-	/**
-	 * Window is minimized or un-minimized by the user
-	 */
-	var Visible = 'visible';
-
-	/**
-	 * Window mouse focus gained or lost
-	 */
-	var Mousefocus = 'mousefocus';
-
-	/**
-	 * A Lua error has occurred in a thread
-	 */
-	var Threaderror = 'threaderror';
-
-	/**
-	 * Joystick connected
-	 */
-	var Joystickadded = 'joystickadded';
-
-	/**
-	 * Joystick disconnected
-	 */
-	var Joystickremoved = 'joystickremoved';
-
-	/**
-	 * Joystick axis motion
-	 */
-	var Joystickaxis = 'joystickaxis';
-
-	/**
-	 * Joystick hat pressed
-	 */
-	var Joystickhat = 'joystickhat';
-
-	/**
-	 * Joystick's virtual gamepad button pressed
-	 */
-	var Gamepadpressed = 'gamepadpressed';
-
-	/**
-	 * Joystick's virtual gamepad button released
-	 */
-	var Gamepadreleased = 'gamepadreleased';
-
-	/**
-	 * Joystick's virtual gamepad axis moved
-	 */
-	var Gamepadaxis = 'gamepadaxis';
-
-	/**
-	 * User entered text
-	 */
-	var Textinput = 'textinput';
-
-	/**
-	 * Mouse position changed
-	 */
-	var Mousemoved = 'mousemoved';
-
-	/**
-	 * Running out of memory on mobile devices system
-	 */
-	var Lowmemory = 'lowmemory';
-
-	/**
-	 * Candidate text for an IME changed
-	 */
-	var Textedited = 'textedited';
-
-	/**
-	 * Mouse wheel moved
-	 */
-	var Wheelmoved = 'wheelmoved';
-
-	/**
-	 * Touch screen touched
-	 */
-	var Touchpressed = 'touchpressed';
-
-	/**
-	 * Touch screen stop touching
-	 */
-	var Touchreleased = 'touchreleased';
-
-	/**
-	 * Touch press moved inside touch screen
-	 */
-	var Touchmoved = 'touchmoved';
-
-	/**
-	 * Directory is dragged and dropped onto the window
-	 */
-	var Directorydropped = 'directorydropped';
-
-	/**
-	 * File is dragged and dropped onto the window.
-	 */
-	var Filedropped = 'filedropped';
-
-	/**
-	 * Joystick pressed
-	 */
-	var Jp = 'jp';
-
-	/**
-	 * Joystick released
-	 */
-	var Jr = 'jr';
-
-	/**
-	 * Key pressed
-	 */
-	var Kp = 'kp';
-
-	/**
-	 * Key released
-	 */
-	var Kr = 'kr';
-
-	/**
-	 * Mouse pressed
-	 */
-	var Mp = 'mp';
-
-	/**
-	 * Mouse released
-	 */
-	var Mr = 'mr';
-
-	/**
-	 * Quit
-	 */
-	var Q = 'q';
-
-	/**
-	 * Window focus gained or lost
-	 */
-	var F = 'f';
+@:multiReturn
+extern class EventWaitResult {
+	var n: Event;
+	var a: Dynamic;
+	var b: Dynamic;
+	var c: Dynamic;
+	var d: Dynamic;
+	var e: Dynamic;
+	var f: Dynamic;
 }

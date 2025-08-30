@@ -3,37 +3,39 @@
 
 package love.thread;
 import haxe.extern.Rest;
+import love.filesystem.FileData;
 import lua.Table;
 import lua.UserData;
 
 /**
- * A Thread is a chunk of code that can run in parallel with other threads. Data can be sent between different threads with Channel objects.
+ * Allows you to work with threads.
+ * Threads are separate Lua environments, running in parallel to the main code. As their code runs separately, they can be used to compute complex operations without adversely affecting the frame rate of the main thread. However, as they are separate environments, they cannot access the variables and functions of the main thread, and communication between threads is limited.
+ * All LOVE objects (userdata) are shared among threads so you'll only have to send their references across threads. You may run into concurrency issues if you manipulate an object on multiple threads at the same time.
+ * When a Thread is started, it only loads the love.thread module. Every other module has to be loaded with require.
  */
-extern class Thread extends Object {
+@:native('love.thread')
+extern class Thread {
 
 	/**
-	 * Retrieves the error string from the thread if it produced an error.
-	 * @return The error message, or nil if the Thread has not caused an error.
+	 * Creates or retrieves a named thread channel.
+	 * @param name The name of the channel you want to create or retrieve.
+	 * @return The Channel object associated with the name.
 	 */
-	public function getError(): String;
+	public static function getChannel(name: String): Channel;
 
 	/**
-	 * Returns whether the thread is currently running.
-	 * Threads which are not running can be (re)started with Thread:start.
-	 * @return True if the thread is running, false otherwise.
+	 * Create a new unnamed thread channel.
+	 * One use for them is to pass new unnamed channels to other threads via Channel:push on a named channel.
+	 * @return The new Channel object.
 	 */
-	public function isRunning(): Bool;
+	public static function newChannel(): Channel;
 
 	/**
-	 * Starts the thread.
-	 * Beginning with version 0.9.0, threads can be restarted after they have completed their execution.
+	 * Creates a new Thread from a filename, string or FileData object containing Lua code.
+	 * @param filename The name of the Lua file to use as the source.
+	 * @return A new Thread that has yet to be started.
 	 */
-	@:overload(function (args: Rest<Dynamic>): Void {})
-	public function start(): Void;
-
-	/**
-	 * Wait for a thread to finish.
-	 * This call will block until the thread finishes.
-	 */
-	public function wait(): Void;
+	@:overload(function (fileData: FileData): Thread {})
+	@:overload(function (codestring: String): Thread {})
+	public static function newThread(filename: String): Thread;
 }

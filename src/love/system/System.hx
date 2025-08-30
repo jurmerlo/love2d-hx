@@ -10,7 +10,7 @@ import lua.UserData;
  * Provides access to information about the user's system.
  */
 @:native('love.system')
-extern class SystemModule {
+extern class System {
 
 	/**
 	 * Gets text from the clipboard.
@@ -27,7 +27,7 @@ extern class SystemModule {
 	/**
 	 * Gets information about the system's power supply.
 	 */
-	public static function getPowerInfo(): SystemModuleGetPowerInfoResult;
+	public static function getPowerInfo(): SystemGetPowerInfoResult;
 
 	/**
 	 * Gets the amount of logical processor in the system.
@@ -63,7 +63,7 @@ extern class SystemModule {
 }
 
 @:multiReturn
-extern class SystemModuleGetPowerInfoResult {
+extern class SystemGetPowerInfoResult {
 	var state: PowerState;
 	var percent: Float;
 	var seconds: Float;

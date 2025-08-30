@@ -23,7 +23,7 @@ import lua.UserData;
  * Many of the functions are used to manipulate the graphics coordinate system, which is essentially the way coordinates are mapped to the display. You can change the position, scale, and even rotation in this way.
  */
 @:native('love.graphics')
-extern class GraphicsModule {
+extern class Graphics {
 
 	/**
 	 * Applies the given Transform object to the current coordinate transformation.
@@ -170,12 +170,12 @@ extern class GraphicsModule {
 	 * Gets the current background color.
 	 * In versions prior to 11.0, color component values were within the range of 0 to 255 instead of 0 to 1.
 	 */
-	public static function getBackgroundColor(): GraphicsModuleGetBackgroundColorResult;
+	public static function getBackgroundColor(): GraphicsGetBackgroundColorResult;
 
 	/**
 	 * Gets the blending mode.
 	 */
-	public static function getBlendMode(): GraphicsModuleGetBlendModeResult;
+	public static function getBlendMode(): GraphicsGetBlendModeResult;
 
 	/**
 	 * Gets the current target Canvas.
@@ -194,13 +194,13 @@ extern class GraphicsModule {
 	 * Gets the current color.
 	 * In versions prior to 11.0, color component values were within the range of 0 to 255 instead of 0 to 1.
 	 */
-	public static function getColor(): GraphicsModuleGetColorResult;
+	public static function getColor(): GraphicsGetColorResult;
 
 	/**
 	 * Gets the active color components used when drawing. Normally all 4 components are active unless love.graphics.setColorMask has been used.
 	 * The color mask determines whether individual components of the colors of drawn objects will affect the color of the screen. They affect love.graphics.clear and Canvas:clear as well.
 	 */
-	public static function getColorMask(): GraphicsModuleGetColorMaskResult;
+	public static function getColorMask(): GraphicsGetColorMaskResult;
 
 	/**
 	 * Gets the DPI scale factor of the window.
@@ -214,18 +214,18 @@ extern class GraphicsModule {
 	/**
 	 * Returns the default scaling filters used with Images, Canvases, and Fonts.
 	 */
-	public static function getDefaultFilter(): GraphicsModuleGetDefaultFilterResult;
+	public static function getDefaultFilter(): GraphicsGetDefaultFilterResult;
 
 	/**
 	 * Gets the current depth test mode and whether writing to the depth buffer is enabled.
 	 * This is low-level functionality designed for use with custom vertex shaders and Meshes with custom vertex attributes. No higher level APIs are provided to set the depth of 2D graphics such as shapes, lines, and Images.
 	 */
-	public static function getDepthMode(): GraphicsModuleGetDepthModeResult;
+	public static function getDepthMode(): GraphicsGetDepthModeResult;
 
 	/**
 	 * Gets the width and height in pixels of the window.
 	 */
-	public static function getDimensions(): GraphicsModuleGetDimensionsResult;
+	public static function getDimensions(): GraphicsGetDimensionsResult;
 
 	/**
 	 * Gets the current Font object.
@@ -281,7 +281,7 @@ extern class GraphicsModule {
 	 * Gets the width and height in pixels of the window.
 	 * love.graphics.getDimensions gets the dimensions of the window in units scaled by the screen's DPI scale factor, rather than pixels. Use getDimensions for calculations related to drawing to the screen and using the graphics coordinate system (calculating the center of the screen, for example), and getPixelDimensions only when dealing specifically with underlying pixels (pixel-related calculations in a pixel Shader, for example).
 	 */
-	public static function getPixelDimensions(): GraphicsModuleGetPixelDimensionsResult;
+	public static function getPixelDimensions(): GraphicsGetPixelDimensionsResult;
 
 	/**
 	 * Gets the height in pixels of the window.
@@ -306,12 +306,12 @@ extern class GraphicsModule {
 	/**
 	 * Gets information about the system's video card and drivers.
 	 */
-	public static function getRendererInfo(): GraphicsModuleGetRendererInfoResult;
+	public static function getRendererInfo(): GraphicsGetRendererInfoResult;
 
 	/**
 	 * Gets the current scissor box.
 	 */
-	public static function getScissor(): GraphicsModuleGetScissorResult;
+	public static function getScissor(): GraphicsGetScissorResult;
 
 	/**
 	 * Gets the current Shader. Returns nil if none is set.
@@ -337,7 +337,7 @@ extern class GraphicsModule {
 	 * When stencil testing is enabled, the geometry of everything that is drawn afterward will be clipped / stencilled out based on a comparison between the arguments of this function and the stencil value of each pixel that the geometry touches. The stencil values of pixels are affected via love.graphics.stencil.
 	 * Each Canvas has its own per-pixel stencil values.
 	 */
-	public static function getStencilTest(): GraphicsModuleGetStencilTestResult;
+	public static function getStencilTest(): GraphicsGetStencilTestResult;
 
 	/**
 	 * Gets the optional graphics features and whether they're supported on the system.
@@ -381,7 +381,7 @@ extern class GraphicsModule {
 	 * @param screenX The x component of the screen-space position.
 	 * @param screenY The y component of the screen-space position.
 	 */
-	public static function inverseTransformPoint(screenX: Float, screenY: Float): GraphicsModuleInverseTransformPointResult;
+	public static function inverseTransformPoint(screenX: Float, screenY: Float): GraphicsInverseTransformPointResult;
 
 	/**
 	 * Gets whether the graphics module is able to be used. If it is not active, love.graphics function and method calls will not work correctly and may cause the program to crash.
@@ -903,7 +903,7 @@ extern class GraphicsModule {
 	 * @param globalX The x component of the position in global coordinates.
 	 * @param globalY The y component of the position in global coordinates.
 	 */
-	public static function transformPoint(globalX: Float, globalY: Float): GraphicsModuleTransformPointResult;
+	public static function transformPoint(globalX: Float, globalY: Float): GraphicsTransformPointResult;
 
 	/**
 	 * Translates the coordinate system in two dimensions.
@@ -921,36 +921,36 @@ extern class GraphicsModule {
 	 * @param gles Validate code as GLSL ES shader.
 	 * @param code The pixel shader or vertex shader code, or a filename pointing to a file with the code.
 	 */
-	@:overload(function (gles: Bool, pixelcode: String, vertexcode: String): GraphicsModuleValidateShaderResult {})
-	public static function validateShader(gles: Bool, code: String): GraphicsModuleValidateShaderResult;
+	@:overload(function (gles: Bool, pixelcode: String, vertexcode: String): GraphicsValidateShaderResult {})
+	public static function validateShader(gles: Bool, code: String): GraphicsValidateShaderResult;
 }
 
 @:multiReturn
-extern class GraphicsModuleValidateShaderResult {
+extern class GraphicsValidateShaderResult {
 	var status: Bool;
 	var message: String;
 }
 
 @:multiReturn
-extern class GraphicsModuleTransformPointResult {
+extern class GraphicsTransformPointResult {
 	var screenX: Float;
 	var screenY: Float;
 }
 
 @:multiReturn
-extern class GraphicsModuleInverseTransformPointResult {
+extern class GraphicsInverseTransformPointResult {
 	var globalX: Float;
 	var globalY: Float;
 }
 
 @:multiReturn
-extern class GraphicsModuleGetStencilTestResult {
+extern class GraphicsGetStencilTestResult {
 	var comparemode: CompareMode;
 	var comparevalue: Float;
 }
 
 @:multiReturn
-extern class GraphicsModuleGetScissorResult {
+extern class GraphicsGetScissorResult {
 	var x: Float;
 	var y: Float;
 	var width: Float;
@@ -958,7 +958,7 @@ extern class GraphicsModuleGetScissorResult {
 }
 
 @:multiReturn
-extern class GraphicsModuleGetRendererInfoResult {
+extern class GraphicsGetRendererInfoResult {
 	var name: String;
 	var version: String;
 	var vendor: String;
@@ -966,32 +966,32 @@ extern class GraphicsModuleGetRendererInfoResult {
 }
 
 @:multiReturn
-extern class GraphicsModuleGetPixelDimensionsResult {
+extern class GraphicsGetPixelDimensionsResult {
 	var pixelwidth: Float;
 	var pixelheight: Float;
 }
 
 @:multiReturn
-extern class GraphicsModuleGetDimensionsResult {
+extern class GraphicsGetDimensionsResult {
 	var width: Float;
 	var height: Float;
 }
 
 @:multiReturn
-extern class GraphicsModuleGetDepthModeResult {
+extern class GraphicsGetDepthModeResult {
 	var comparemode: CompareMode;
 	var write: Bool;
 }
 
 @:multiReturn
-extern class GraphicsModuleGetDefaultFilterResult {
+extern class GraphicsGetDefaultFilterResult {
 	var min: FilterMode;
 	var mag: FilterMode;
 	var anisotropy: Float;
 }
 
 @:multiReturn
-extern class GraphicsModuleGetColorMaskResult {
+extern class GraphicsGetColorMaskResult {
 	var r: Bool;
 	var g: Bool;
 	var b: Bool;
@@ -999,7 +999,7 @@ extern class GraphicsModuleGetColorMaskResult {
 }
 
 @:multiReturn
-extern class GraphicsModuleGetColorResult {
+extern class GraphicsGetColorResult {
 	var r: Float;
 	var g: Float;
 	var b: Float;
@@ -1007,13 +1007,13 @@ extern class GraphicsModuleGetColorResult {
 }
 
 @:multiReturn
-extern class GraphicsModuleGetBlendModeResult {
+extern class GraphicsGetBlendModeResult {
 	var mode: BlendMode;
 	var alphamode: BlendAlphaMode;
 }
 
 @:multiReturn
-extern class GraphicsModuleGetBackgroundColorResult {
+extern class GraphicsGetBackgroundColorResult {
 	var r: Float;
 	var g: Float;
 	var b: Float;

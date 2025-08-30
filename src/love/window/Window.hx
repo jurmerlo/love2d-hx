@@ -11,7 +11,7 @@ import lua.UserData;
  * Provides an interface for modifying and retrieving information about the program's window.
  */
 @:native('love.window')
-extern class WindowModule {
+extern class Window {
 
 	/**
 	 * Closes the window. It can be reopened with love.window.setMode.
@@ -26,7 +26,7 @@ extern class WindowModule {
 	 * @param pixelvalue A number in pixels to convert to density-independent units.
 	 * @return The converted number, in density-independent units.
 	 */
-	@:overload(function (px: Float, py: Float): WindowModuleFromPixelsResult {})
+	@:overload(function (px: Float, py: Float): WindowFromPixelsResult {})
 	public static function fromPixels(pixelvalue: Float): Float;
 
 	/**
@@ -42,7 +42,7 @@ extern class WindowModule {
 	 * Gets the width and height of the desktop.
 	 * @param displayindex The index of the display, if multiple monitors are available.
 	 */
-	public static function getDesktopDimensions(?displayindex: Float): WindowModuleGetDesktopDimensionsResult;
+	public static function getDesktopDimensions(?displayindex: Float): WindowGetDesktopDimensionsResult;
 
 	/**
 	 * Gets the number of connected monitors.
@@ -67,7 +67,7 @@ extern class WindowModule {
 	/**
 	 * Gets whether the window is fullscreen.
 	 */
-	public static function getFullscreen(): WindowModuleGetFullscreenResult;
+	public static function getFullscreen(): WindowGetFullscreenResult;
 
 	/**
 	 * Gets a list of supported fullscreen modes.
@@ -85,18 +85,18 @@ extern class WindowModule {
 	/**
 	 * Gets the display mode and properties of the window.
 	 */
-	public static function getMode(): WindowModuleGetModeResult;
+	public static function getMode(): WindowGetModeResult;
 
 	/**
 	 * Gets the position of the window on the screen.
 	 * The window position is in the coordinate space of the display it is currently in.
 	 */
-	public static function getPosition(): WindowModuleGetPositionResult;
+	public static function getPosition(): WindowGetPositionResult;
 
 	/**
 	 * Gets area inside the window which is known to be unobstructed by a system title bar, the iPhone X notch, etc. Useful for making sure UI elements can be seen by the user.
 	 */
-	public static function getSafeArea(): WindowModuleGetSafeAreaResult;
+	public static function getSafeArea(): WindowGetSafeAreaResult;
 
 	/**
 	 * Gets the window title.
@@ -251,7 +251,7 @@ extern class WindowModule {
 	 * @param value A number in density-independent units to convert to pixels.
 	 * @return The converted number, in pixels.
 	 */
-	@:overload(function (x: Float, y: Float): WindowModuleToPixelsResult {})
+	@:overload(function (x: Float, y: Float): WindowToPixelsResult {})
 	public static function toPixels(value: Float): Float;
 
 	/**
@@ -267,13 +267,13 @@ extern class WindowModule {
 }
 
 @:multiReturn
-extern class WindowModuleToPixelsResult {
+extern class WindowToPixelsResult {
 	var px: Float;
 	var py: Float;
 }
 
 @:multiReturn
-extern class WindowModuleGetSafeAreaResult {
+extern class WindowGetSafeAreaResult {
 	var x: Float;
 	var y: Float;
 	var w: Float;
@@ -281,33 +281,33 @@ extern class WindowModuleGetSafeAreaResult {
 }
 
 @:multiReturn
-extern class WindowModuleGetPositionResult {
+extern class WindowGetPositionResult {
 	var x: Float;
 	var y: Float;
 	var displayindex: Float;
 }
 
 @:multiReturn
-extern class WindowModuleGetModeResult {
+extern class WindowGetModeResult {
 	var width: Float;
 	var height: Float;
 	var flags: Table<Dynamic, Dynamic>;
 }
 
 @:multiReturn
-extern class WindowModuleGetFullscreenResult {
+extern class WindowGetFullscreenResult {
 	var fullscreen: Bool;
 	var fstype: FullscreenType;
 }
 
 @:multiReturn
-extern class WindowModuleGetDesktopDimensionsResult {
+extern class WindowGetDesktopDimensionsResult {
 	var width: Float;
 	var height: Float;
 }
 
 @:multiReturn
-extern class WindowModuleFromPixelsResult {
+extern class WindowFromPixelsResult {
 	var x: Float;
 	var y: Float;
 }

@@ -10,7 +10,7 @@ import lua.UserData;
  * Provides an interface to the user's keyboard.
  */
 @:native('love.keyboard')
-extern class KeyboardModule {
+extern class Keyboard {
 
 	/**
 	 * Gets the key corresponding to the given hardware scancode.

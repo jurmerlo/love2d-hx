@@ -12,7 +12,7 @@ import lua.UserData;
  * Provides an interface to the user's mouse.
  */
 @:native('love.mouse')
-extern class MouseModule {
+extern class Mouse {
 
 	/**
 	 * Gets the current Cursor.
@@ -23,7 +23,7 @@ extern class MouseModule {
 	/**
 	 * Returns the current position of the mouse.
 	 */
-	public static function getPosition(): MouseModuleGetPositionResult;
+	public static function getPosition(): MouseGetPositionResult;
 
 	/**
 	 * Gets whether relative mode is enabled for the mouse.
@@ -144,7 +144,7 @@ extern class MouseModule {
 }
 
 @:multiReturn
-extern class MouseModuleGetPositionResult {
+extern class MouseGetPositionResult {
 	var x: Float;
 	var y: Float;
 }

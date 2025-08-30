@@ -12,7 +12,7 @@ import lua.UserData;
  * Allows you to work with fonts.
  */
 @:native('love.font')
-extern class FontModule {
+extern class Font {
 
 	/**
 	 * Creates a new BMFont Rasterizer.

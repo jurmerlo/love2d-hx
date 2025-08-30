@@ -11,7 +11,7 @@ import lua.UserData;
  * Provides an interface to decode encoded image data.
  */
 @:native('love.image')
-extern class ImageModule {
+extern class Image {
 
 	/**
 	 * Determines whether a file can be loaded as CompressedImageData.

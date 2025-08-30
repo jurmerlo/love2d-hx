@@ -11,7 +11,7 @@ import lua.UserData;
  * This module is responsible for decoding sound files. It can't play the sounds, see love.audio for that.
  */
 @:native('love.sound')
-extern class SoundModule {
+extern class Sound {
 
 	/**
 	 * Attempts to find a decoder for the encoded sound data in the specified file.

@@ -78,9 +78,6 @@ private function createModule(module: JsonModule, superType: SuperType, resolver
 
   lines.push('@:native(\'${moduleName}\')');
   var className = capitalizeFirstLetter(luaName != null ? luaName : module.name);
-  if (className != 'Love') {
-    className += 'Module';
-  }
 
   lines.push('extern class ${className} {');
 

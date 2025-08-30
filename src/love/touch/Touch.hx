@@ -10,13 +10,13 @@ import lua.UserData;
  * Provides an interface to touch-screen presses.
  */
 @:native('love.touch')
-extern class TouchModule {
+extern class Touch {
 
 	/**
 	 * Gets the current position of the specified touch-press, in pixels.
 	 * @param id The identifier of the touch-press. Use love.touch.getTouches, love.touchpressed, or love.touchmoved to obtain touch id values.
 	 */
-	public static function getPosition(id: UserData): TouchModuleGetPositionResult;
+	public static function getPosition(id: UserData): TouchGetPositionResult;
 
 	/**
 	 * Gets the current pressure of the specified touch-press.
@@ -33,7 +33,7 @@ extern class TouchModule {
 }
 
 @:multiReturn
-extern class TouchModuleGetPositionResult {
+extern class TouchGetPositionResult {
 	var x: Float;
 	var y: Float;
 }
