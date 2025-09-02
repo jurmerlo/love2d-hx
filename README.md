@@ -8,7 +8,7 @@ Based on [love-haxe-wrappergen](https://github.com/bartbes/love-haxe-wrappergen)
 
 ## Installation
 ```bash
-haxelib git https://github.com/square-two/love2d-hx
+haxelib git https://github.com/jurmerlo/love2d-hx
 ```
 
 
@@ -17,12 +17,12 @@ To generate new externs you need to have [lua](https://lua.org) and [haxe](https
 
 Clone the repo
 ```bash
-git clone https://github.com/square-two/love2d-hx
+git clone https://github.com/jurmerlo/love2d-hx
 ```
 
-Initialize the git submodules
+Initialize the git submodule
 ```bash
-git submodules update --init
+git submodule update --init
 ```
 
 Generate the api json file:
