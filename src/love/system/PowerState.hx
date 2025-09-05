@@ -6,7 +6,7 @@ package love.system;
 /**
  * The basic state of the system's power supply.
  */
-enum abstract PowerState (String) {
+enum abstract PowerState (String) from String to String {
 
 	/**
 	 * Cannot determine power status.

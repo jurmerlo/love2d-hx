@@ -6,7 +6,7 @@ package love.window;
 /**
  * Types of fullscreen modes.
  */
-enum abstract FullscreenType (String) {
+enum abstract FullscreenType (String) from String to String {
 
 	/**
 	 * Sometimes known as borderless fullscreen windowed mode. A borderless screen-sized window is created which sits on top of all desktop UI elements. The window is automatically resized to match the dimensions of the desktop, and its size cannot be changed.

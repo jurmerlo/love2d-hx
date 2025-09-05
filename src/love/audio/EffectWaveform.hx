@@ -6,7 +6,7 @@ package love.audio;
 /**
  * The different types of waveforms that can be used with the '''ringmodulator''' EffectType.
  */
-enum abstract EffectWaveform (String) {
+enum abstract EffectWaveform (String) from String to String {
 
 	/**
 	 * A sawtooth wave, also known as a ramp wave. Named for its linear rise, and (near-)instantaneous fall along time.

@@ -170,7 +170,7 @@ private function createEnum(em: JsonEnum, packageName: String, resolver: Package
   if (em.description != null) {
     lines = lines.concat(createComment(em.description));
   }
-  lines.push('enum abstract ${em.name} (String) {');
+  lines.push('enum abstract ${em.name} (String) from String to String {');
 
   for (con in em.constants) {
     var name = con.name;

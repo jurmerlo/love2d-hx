@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * Types of particle area spread distribution.
  */
-enum abstract AreaSpreadDistribution (String) {
+enum abstract AreaSpreadDistribution (String) from String to String {
 
 	/**
 	 * Uniform distribution.

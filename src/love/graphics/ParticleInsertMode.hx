@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * How newly created particles are added to the ParticleSystem.
  */
-enum abstract ParticleInsertMode (String) {
+enum abstract ParticleInsertMode (String) from String to String {
 
 	/**
 	 * Particles are inserted at the top of the ParticleSystem's list of particles.

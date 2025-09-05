@@ -6,7 +6,7 @@ package love.joystick;
 /**
  * Types of Joystick inputs.
  */
-enum abstract JoystickInputType (String) {
+enum abstract JoystickInputType (String) from String to String {
 
 	/**
 	 * Analog axis.

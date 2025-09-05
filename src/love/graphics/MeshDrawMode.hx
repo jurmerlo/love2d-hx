@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * How a Mesh's vertices are used when drawing.
  */
-enum abstract MeshDrawMode (String) {
+enum abstract MeshDrawMode (String) from String to String {
 
 	/**
 	 * The vertices create a "fan" shape with the first vertex acting as the hub point. Can be easily used to draw simple convex polygons.

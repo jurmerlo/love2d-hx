@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * Controls whether a Canvas has mipmaps, and its behaviour when it does.
  */
-enum abstract MipmapMode (String) {
+enum abstract MipmapMode (String) from String to String {
 
 	/**
 	 * The Canvas has no mipmaps.

@@ -6,7 +6,7 @@ package love.keyboard;
 /**
  * All the keys you can press. Note that some keys may not be available on your keyboard or system.
  */
-enum abstract KeyConstant (String) {
+enum abstract KeyConstant (String) from String to String {
 
 	/**
 	 * The A key

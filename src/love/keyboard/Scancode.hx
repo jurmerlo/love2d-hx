@@ -9,7 +9,7 @@ package love.keyboard;
  * Using scancodes, rather than keycodes, is useful because keyboards with layouts differing from the US/UK layout(s) might have keys that generate 'unknown' keycodes, but the scancodes will still be detected. This however would necessitate having a list for each keyboard layout one would choose to support.
  * One could use textinput or textedited instead, but those only give back the end result of keys used, i.e. you can't get modifiers on their own from it, only the final symbols that were generated.
  */
-enum abstract Scancode (String) {
+enum abstract Scancode (String) from String to String {
 
 	/**
 	 * The 'A' key on an American layout.

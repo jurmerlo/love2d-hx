@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * Different types of arcs that can be drawn.
  */
-enum abstract ArcType (String) {
+enum abstract ArcType (String) from String to String {
 
 	/**
 	 * The arc is drawn like a slice of pie, with the arc circle connected to the center at its end-points.

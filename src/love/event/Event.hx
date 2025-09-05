@@ -50,7 +50,7 @@ extern class Event {
 	 * The quit event is a signal for the event handler to close LÖVE. It's possible to abort the exit process with the love.quit callback.
 	 * @param exitstatus The program exit status to use when closing the application.
 	 */
-	@:overload(function ('restart': String): Void {})
+	@:overload(function (restart: String): Void {})
 	public static function quit(?exitstatus: Float): Void;
 
 	/**

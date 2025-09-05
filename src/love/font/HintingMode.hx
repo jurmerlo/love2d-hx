@@ -6,7 +6,7 @@ package love.font;
 /**
  * True Type hinting mode.
  */
-enum abstract HintingMode (String) {
+enum abstract HintingMode (String) from String to String {
 
 	/**
 	 * Default hinting. Should be preferred for typical antialiased fonts.

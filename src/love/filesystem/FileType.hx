@@ -6,7 +6,7 @@ package love.filesystem;
 /**
  * The type of a file.
  */
-enum abstract FileType (String) {
+enum abstract FileType (String) from String to String {
 
 	/**
 	 * Regular file.

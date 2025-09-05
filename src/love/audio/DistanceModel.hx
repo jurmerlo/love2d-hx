@@ -7,7 +7,7 @@ package love.audio;
  * The different distance models.
  * Extended information can be found in the chapter "3.4. Attenuation By Distance" of the OpenAL 1.1 specification.
  */
-enum abstract DistanceModel (String) {
+enum abstract DistanceModel (String) from String to String {
 
 	/**
 	 * Sources do not get attenuated.

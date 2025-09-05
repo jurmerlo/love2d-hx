@@ -6,7 +6,7 @@ package love.joystick;
 /**
  * Joystick hat positions.
  */
-enum abstract JoystickHat (String) {
+enum abstract JoystickHat (String) from String to String {
 
 	/**
 	 * Centered

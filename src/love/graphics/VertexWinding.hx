@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * How Mesh geometry vertices are ordered.
  */
-enum abstract VertexWinding (String) {
+enum abstract VertexWinding (String) from String to String {
 
 	/**
 	 * Clockwise.

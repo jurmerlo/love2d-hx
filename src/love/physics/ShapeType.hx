@@ -6,7 +6,7 @@ package love.physics;
 /**
  * The different types of Shapes, as returned by Shape:getType.
  */
-enum abstract ShapeType (String) {
+enum abstract ShapeType (String) from String to String {
 
 	/**
 	 * The Shape is a CircleShape.

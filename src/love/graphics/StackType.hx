@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * Graphics state stack types used with love.graphics.push.
  */
-enum abstract StackType (String) {
+enum abstract StackType (String) from String to String {
 
 	/**
 	 * The transformation stack (love.graphics.translate, love.graphics.rotate, etc.)

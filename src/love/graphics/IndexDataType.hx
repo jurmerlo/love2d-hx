@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * Vertex map datatype for Data variant of Mesh:setVertexMap.
  */
-enum abstract IndexDataType (String) {
+enum abstract IndexDataType (String) from String to String {
 
 	/**
 	 * The vertex map is array of unsigned word (16-bit).

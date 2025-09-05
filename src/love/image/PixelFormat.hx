@@ -6,7 +6,7 @@ package love.image;
 /**
  * Pixel formats for Textures, ImageData, and CompressedImageData.
  */
-enum abstract PixelFormat (String) {
+enum abstract PixelFormat (String) from String to String {
 
 	/**
 	 * Indicates unknown pixel format, used internally.

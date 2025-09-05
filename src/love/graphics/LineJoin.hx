@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * Line join style.
  */
-enum abstract LineJoin (String) {
+enum abstract LineJoin (String) from String to String {
 
 	/**
 	 * The ends of the line segments beveled in an angle so that they join seamlessly.

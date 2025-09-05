@@ -6,7 +6,7 @@ package love.image;
 /**
  * Encoded image formats.
  */
-enum abstract ImageFormat (String) {
+enum abstract ImageFormat (String) from String to String {
 
 	/**
 	 * Targa image format.

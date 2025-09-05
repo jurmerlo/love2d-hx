@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * Graphics features that can be checked for with love.graphics.getSupported.
  */
-enum abstract GraphicsFeature (String) {
+enum abstract GraphicsFeature (String) from String to String {
 
 	/**
 	 * Whether the "clampzero" WrapMode is supported.

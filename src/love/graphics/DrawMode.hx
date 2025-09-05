@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * Controls whether shapes are drawn as an outline, or filled.
  */
-enum abstract DrawMode (String) {
+enum abstract DrawMode (String) from String to String {
 
 	/**
 	 * Draw filled shape.

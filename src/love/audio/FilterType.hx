@@ -6,7 +6,7 @@ package love.audio;
 /**
  * Types of filters for Sources.
  */
-enum abstract FilterType (String) {
+enum abstract FilterType (String) from String to String {
 
 	/**
 	 * Low-pass filter. High frequency sounds are attenuated.

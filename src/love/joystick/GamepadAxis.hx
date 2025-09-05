@@ -6,7 +6,7 @@ package love.joystick;
 /**
  * Virtual gamepad axes.
  */
-enum abstract GamepadAxis (String) {
+enum abstract GamepadAxis (String) from String to String {
 
 	/**
 	 * The x-axis of the left thumbstick.

@@ -6,7 +6,7 @@ package love.data;
 /**
  * Return type of various data-returning functions.
  */
-enum abstract ContainerType (String) {
+enum abstract ContainerType (String) from String to String {
 
 	/**
 	 * Return type is ByteData.

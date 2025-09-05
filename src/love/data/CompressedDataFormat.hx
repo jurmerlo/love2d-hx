@@ -6,7 +6,7 @@ package love.data;
 /**
  * Compressed data formats.
  */
-enum abstract CompressedDataFormat (String) {
+enum abstract CompressedDataFormat (String) from String to String {
 
 	/**
 	 * The LZ4 compression format. Compresses and decompresses very quickly, but the compression ratio is not the best. LZ4-HC is used when compression level 9 is specified. Some benchmarks are available here.

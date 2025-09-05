@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * Text alignment.
  */
-enum abstract AlignMode (String) {
+enum abstract AlignMode (String) from String to String {
 
 	/**
 	 * Align text center.

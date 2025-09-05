@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * The styles in which lines are drawn.
  */
-enum abstract LineStyle (String) {
+enum abstract LineStyle (String) from String to String {
 
 	/**
 	 * Draw rough lines.

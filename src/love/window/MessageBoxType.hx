@@ -6,7 +6,7 @@ package love.window;
 /**
  * Types of message box dialogs. Different types may have slightly different looks.
  */
-enum abstract MessageBoxType (String) {
+enum abstract MessageBoxType (String) from String to String {
 
 	/**
 	 * Informational dialog.

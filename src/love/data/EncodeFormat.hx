@@ -6,7 +6,7 @@ package love.data;
 /**
  * Encoding format used to encode or decode data.
  */
-enum abstract EncodeFormat (String) {
+enum abstract EncodeFormat (String) from String to String {
 
 	/**
 	 * Encode/decode data as base64 binary-to-text encoding.

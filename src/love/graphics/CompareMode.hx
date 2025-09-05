@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * Different types of per-pixel stencil test and depth test comparisons. The pixels of an object will be drawn if the comparison succeeds, for each pixel that the object touches.
  */
-enum abstract CompareMode (String) {
+enum abstract CompareMode (String) from String to String {
 
 	/**
 	 * * stencil tests: the stencil value of the pixel must be equal to the supplied value.

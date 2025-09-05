@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * Types of system-dependent graphics limits checked for using love.graphics.getSystemLimits.
  */
-enum abstract GraphicsLimit (String) {
+enum abstract GraphicsLimit (String) from String to String {
 
 	/**
 	 * The maximum size of points.

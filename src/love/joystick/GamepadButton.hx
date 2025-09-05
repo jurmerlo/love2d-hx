@@ -6,7 +6,7 @@ package love.joystick;
 /**
  * Virtual gamepad buttons.
  */
-enum abstract GamepadButton (String) {
+enum abstract GamepadButton (String) from String to String {
 
 	/**
 	 * Bottom face button (A).

@@ -6,7 +6,7 @@ package love.physics;
 /**
  * Different types of joints.
  */
-enum abstract JointType (String) {
+enum abstract JointType (String) from String to String {
 
 	/**
 	 * A DistanceJoint.

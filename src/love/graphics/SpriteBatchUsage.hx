@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * Usage hints for SpriteBatches and Meshes to optimize data storage and access.
  */
-enum abstract SpriteBatchUsage (String) {
+enum abstract SpriteBatchUsage (String) from String to String {
 
 	/**
 	 * The object's data will change occasionally during its lifetime. 

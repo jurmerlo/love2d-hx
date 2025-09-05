@@ -6,7 +6,7 @@ package love.filesystem;
 /**
  * The different modes you can open a File in.
  */
-enum abstract FileMode (String) {
+enum abstract FileMode (String) from String to String {
 
 	/**
 	 * Open a file for read.

@@ -7,7 +7,7 @@ package love.image;
  * Compressed image data formats. Here and here are a couple overviews of many of the formats.
  * Unlike traditional PNG or jpeg, these formats stay compressed in RAM and in the graphics card's VRAM. This is good for saving memory space as well as improving performance, since the graphics card will be able to keep more of the image's pixels in its fast-access cache when drawing it.
  */
-enum abstract CompressedImageFormat (String) {
+enum abstract CompressedImageFormat (String) from String to String {
 
 	/**
 	 * The DXT1 format. RGB data at 4 bits per pixel (compared to 32 bits for ImageData and regular Images.) Suitable for fully opaque images on desktop systems.

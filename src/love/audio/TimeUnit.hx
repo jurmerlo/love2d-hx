@@ -6,7 +6,7 @@ package love.audio;
 /**
  * Units that represent time.
  */
-enum abstract TimeUnit (String) {
+enum abstract TimeUnit (String) from String to String {
 
 	/**
 	 * Regular seconds.

@@ -7,7 +7,7 @@ package love.audio;
  * Types of audio sources.
  * A good rule of thumb is to use stream for music files and static for all short sound effects. Basically, you want to avoid loading large files into memory at once.
  */
-enum abstract SourceType (String) {
+enum abstract SourceType (String) from String to String {
 
 	/**
 	 * The whole audio is decoded.

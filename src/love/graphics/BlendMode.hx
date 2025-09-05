@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * Different ways to do color blending. See BlendAlphaMode and the BlendMode Formulas for additional notes.
  */
-enum abstract BlendMode (String) {
+enum abstract BlendMode (String) from String to String {
 
 	/**
 	 * Alpha blending (normal). The alpha of what's drawn determines its opacity.

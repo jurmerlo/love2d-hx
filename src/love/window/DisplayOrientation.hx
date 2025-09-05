@@ -6,7 +6,7 @@ package love.window;
 /**
  * Types of device display orientation.
  */
-enum abstract DisplayOrientation (String) {
+enum abstract DisplayOrientation (String) from String to String {
 
 	/**
 	 * Orientation cannot be determined.

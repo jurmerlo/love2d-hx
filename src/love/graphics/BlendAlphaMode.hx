@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * Different ways alpha affects color blending. See BlendMode and the BlendMode Formulas for additional notes.
  */
-enum abstract BlendAlphaMode (String) {
+enum abstract BlendAlphaMode (String) from String to String {
 
 	/**
 	 * The RGB values of what's drawn are multiplied by the alpha values of those colors during blending. This is the default alpha mode.

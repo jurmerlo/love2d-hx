@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * How the image is filtered when scaling.
  */
-enum abstract FilterMode (String) {
+enum abstract FilterMode (String) from String to String {
 
 	/**
 	 * Scale image with linear interpolation.

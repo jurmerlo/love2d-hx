@@ -6,7 +6,7 @@ package love.filesystem;
 /**
  * Buffer modes for File objects.
  */
-enum abstract BufferMode (String) {
+enum abstract BufferMode (String) from String to String {
 
 	/**
 	 * No buffering. The result of write and append operations appears immediately.

@@ -6,7 +6,7 @@ package love.audio;
 /**
  * The different types of effects supported by love.audio.setEffect.
  */
-enum abstract EffectType (String) {
+enum abstract EffectType (String) from String to String {
 
 	/**
 	 * Plays multiple copies of the sound with slight pitch and time variation. Used to make sounds sound "fuller" or "thicker".

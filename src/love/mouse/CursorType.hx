@@ -6,7 +6,7 @@ package love.mouse;
 /**
  * Types of hardware cursors.
  */
-enum abstract CursorType (String) {
+enum abstract CursorType (String) from String to String {
 
 	/**
 	 * The cursor is using a custom image.

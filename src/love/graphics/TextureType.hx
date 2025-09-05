@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * Types of textures (2D, cubemap, etc.)
  */
-enum abstract TextureType (String) {
+enum abstract TextureType (String) from String to String {
 
 	/**
 	 * Regular 2D texture with width and height.

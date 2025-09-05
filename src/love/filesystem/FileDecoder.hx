@@ -6,7 +6,7 @@ package love.filesystem;
 /**
  * How to decode a given FileData.
  */
-enum abstract FileDecoder (String) {
+enum abstract FileDecoder (String) from String to String {
 
 	/**
 	 * The data is unencoded.

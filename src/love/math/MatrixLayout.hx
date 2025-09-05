@@ -6,7 +6,7 @@ package love.math;
 /**
  * The layout of matrix elements (row-major or column-major).
  */
-enum abstract MatrixLayout (String) {
+enum abstract MatrixLayout (String) from String to String {
 
 	/**
 	 * The matrix is row-major:

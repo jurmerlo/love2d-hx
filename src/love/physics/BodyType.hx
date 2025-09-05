@@ -6,7 +6,7 @@ package love.physics;
 /**
  * The types of a Body. 
  */
-enum abstract BodyType (String) {
+enum abstract BodyType (String) from String to String {
 
 	/**
 	 * Static bodies do not move.

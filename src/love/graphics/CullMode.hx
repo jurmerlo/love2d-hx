@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * How Mesh geometry is culled when rendering.
  */
-enum abstract CullMode (String) {
+enum abstract CullMode (String) from String to String {
 
 	/**
 	 * Back-facing triangles in Meshes are culled (not rendered). The vertex order of a triangle determines whether it is back- or front-facing.

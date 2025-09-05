@@ -6,7 +6,7 @@ package love.data;
 /**
  * Hash algorithm of love.data.hash.
  */
-enum abstract HashFunction (String) {
+enum abstract HashFunction (String) from String to String {
 
 	/**
 	 * MD5 hash algorithm (16 bytes).

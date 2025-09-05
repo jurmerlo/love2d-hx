@@ -6,7 +6,7 @@ package love.graphics;
 /**
  * How a stencil function modifies the stencil values of pixels it touches.
  */
-enum abstract StencilAction (String) {
+enum abstract StencilAction (String) from String to String {
 
 	/**
 	 * The stencil value of a pixel will be replaced by the value specified in love.graphics.stencil, if any object touches the pixel.
